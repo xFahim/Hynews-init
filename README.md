@@ -5,6 +5,7 @@ A FastAPI-based news aggregation service that provides clean JSON responses for 
 ## 🎯 Overview
 
 Hynews aggregates news from multiple Bangladeshi news sources through a unified REST API. Each source is handled differently based on availability:
+
 - **API Integration**: For sources with public APIs
 - **Web Scraping**: For sources requiring HTML parsing
 - **Hybrid Approach**: Combining both methods for complete data
@@ -55,22 +56,27 @@ The API will be available at `http://localhost:8000`
 ## 📡 API Endpoints
 
 ### Root
+
 ```http
 GET /
 ```
+
 Returns API information and available endpoints.
 
 ---
 
 ### Daily Star
+
 ```http
 GET /dailystar/latest?limit=10
 ```
 
 **Parameters:**
+
 - `limit` (optional): Number of articles (1-100, default: 10)
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -92,14 +98,17 @@ GET /dailystar/latest?limit=10
 ---
 
 ### Prothom Alo
+
 ```http
 GET /prothomalo/latest?limit=10
 ```
 
 **Parameters:**
+
 - `limit` (optional): Number of articles (1-100, default: 10)
 
 **Response:**
+
 ```json
 [
   {
@@ -117,14 +126,17 @@ GET /prothomalo/latest?limit=10
 ---
 
 ### Ittefaq
+
 ```http
 GET /ittefaq/latest?limit=10
 ```
 
 **Parameters:**
+
 - `limit` (optional): Number of articles to return (1-100)
 
 **Response:**
+
 ```json
 [
   {
@@ -174,12 +186,12 @@ Hynews/
 
 ## 📰 Supported News Sources
 
-| Source | Method | Status |
-|--------|--------|--------|
-| **Daily Star** | Web Scraping | ✅ Active |
-| **Prothom Alo** | API + Scraping | ✅ Active |
-| **Ittefaq** | API + Scraping | ✅ Active |
-| **More sources** | Coming Soon | 🚧 Planned |
+| Source           | Method         | Status     |
+| ---------------- | -------------- | ---------- |
+| **Daily Star**   | Web Scraping   | ✅ Active  |
+| **Prothom Alo**  | API + Scraping | ✅ Active  |
+| **Ittefaq**      | API + Scraping | ✅ Active  |
+| **More sources** | Coming Soon    | 🚧 Planned |
 
 ## 🔧 Development
 
@@ -199,6 +211,7 @@ Hynews/
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
+
 - Add new news sources
 - Improve existing scrapers
 - Enhance error handling
