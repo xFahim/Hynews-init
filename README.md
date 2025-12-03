@@ -1,6 +1,6 @@
 <div align="center">
 
-![Hynews Logo](assets/hylogo.png)
+<img src="assets/hylogo.png" alt="Hynews Logo" width="120"/>
 
 # Hynews API
 
@@ -23,17 +23,17 @@ A FastAPI-based service that aggregates news from major Bangladeshi news sources
 <table>
 <tr>
 <td align="center" width="33%">
-<img src="assets/daily-star.jpg" alt="The Daily Star" width="200"/><br/>
+<img src="assets/daily-star.jpg" alt="The Daily Star" width="180" height="100" style="object-fit: contain;"/><br/>
 <b>The Daily Star</b><br/>
 <code>/dailystar/latest</code>
 </td>
 <td align="center" width="33%">
-<img src="assets/prothom alo.png" alt="Prothom Alo" width="200"/><br/>
+<img src="assets/prothom alo.png" alt="Prothom Alo" width="180" height="100" style="object-fit: contain;"/><br/>
 <b>Prothom Alo</b><br/>
 <code>/prothomalo/latest</code>
 </td>
 <td align="center" width="33%">
-<img src="assets/ittefaq.jpg" alt="Ittefaq" width="200"/><br/>
+<img src="assets/ittefaq.jpg" alt="Ittefaq" width="180" height="100" style="object-fit: contain;"/><br/>
 <b>Ittefaq</b><br/>
 <code>/ittefaq/latest</code>
 </td>
