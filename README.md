@@ -1,230 +1,162 @@
-# Hynews API 🗞️
+<div align="center">
 
-A FastAPI-based news aggregation service that provides clean JSON responses for news articles from popular Bangladeshi news platforms. We handle all the heavy lifting—API integration, web scraping, and data normalization—so you get consistent, structured news data.
+![Hynews Logo](assets/hylogo.png)
 
-## 🎯 Overview
+# Hynews API
 
-Hynews aggregates news from multiple Bangladeshi news sources through a unified REST API. Each source is handled differently based on availability:
+**AI-Powered Bangladeshi News Aggregation API**
 
-- **API Integration**: For sources with public APIs
-- **Web Scraping**: For sources requiring HTML parsing
-- **Hybrid Approach**: Combining both methods for complete data
+A FastAPI-based service that aggregates news from major Bangladeshi news sources and provides intelligent AI-powered daily summaries.
 
-All complexity is abstracted away, delivering clean, normalized JSON responses.
+🌐 **Live API**: [https://hynews-init.vercel.app/](https://hynews-init.vercel.app/)
 
-## ✨ Features
+📚 **API Docs**: [https://hynews-init.vercel.app/docs](https://hynews-init.vercel.app/docs)
 
-- **Multi-source Support**: Daily Star, Prothom Alo, Ittefaq (more coming soon)
-- **Async Operations**: Fast, non-blocking requests using `httpx`
-- **Full Article Content**: Complete article body text extraction
-- **Configurable Parameters**: Control article count, image dimensions, and limits
-- **Clean REST API**: Well-documented endpoints with OpenAPI/Swagger
-- **Error Handling**: Graceful degradation and comprehensive error responses
-
-## 🚀 Quick Start
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd Hynews
-
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-venv\Scripts\activate     # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Run the Server
-
-```bash
-uvicorn app.main:app --reload
-```
-
-The API will be available at `http://localhost:8000`
-
-### API Documentation
-
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-
-## 📡 API Endpoints
-
-### Root
-
-```http
-GET /
-```
-
-Returns API information and available endpoints.
+</div>
 
 ---
 
-### Daily Star
+## 📰 Supported News Sources
 
-```http
-GET /dailystar/latest?limit=10
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="33%">
+<img src="assets/daily-star.jpg" alt="The Daily Star" width="200"/><br/>
+<b>The Daily Star</b><br/>
+<code>/dailystar/latest</code>
+</td>
+<td align="center" width="33%">
+<img src="assets/prothom alo.png" alt="Prothom Alo" width="200"/><br/>
+<b>Prothom Alo</b><br/>
+<code>/prothomalo/latest</code>
+</td>
+<td align="center" width="33%">
+<img src="assets/ittefaq.jpg" alt="Ittefaq" width="200"/><br/>
+<b>Ittefaq</b><br/>
+<code>/ittefaq/latest</code>
+</td>
+</tr>
+</table>
+
+</div>
+
+## ✨ Features
+
+- 📡 **Multi-source News Aggregation** - Daily Star, Prothom Alo, Ittefaq
+- 🤖 **AI Daily Summaries** - Intelligent briefings powered by Google Gemini
+- 💾 **Smart Caching** - Supabase-backed caching for faster responses
+- 🚀 **Fast & Async** - Non-blocking operations with async/await
+- 📝 **Full Article Content** - Complete article text extraction
+- 🎯 **Clean REST API** - Well-documented with OpenAPI/Swagger
+
+## 🚀 Quick Start
+
+```bash
+# Clone and setup
+git clone <repository-url>
+cd Hynews
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment variables
+# Create .env file with:
+# GOOGLE_API_KEY=your_gemini_api_key
+# SUPABASE_URL=your_supabase_url (optional, for caching)
+# SUPABASE_KEY=your_supabase_key (optional, for caching)
+
+# Run server
+uvicorn app.main:app --reload
 ```
 
-**Parameters:**
+Visit `http://localhost:8000/docs` for interactive API documentation.
 
-- `limit` (optional): Number of articles (1-100, default: 10)
+## 📡 API Endpoints
 
-**Response:**
+### Get Latest News
 
+```http
+GET /{source}/latest?limit=10
+```
+
+**Sources**: `dailystar`, `prothomalo`, `ittefaq`
+
+**Response Format**:
 ```json
 {
   "status": "success",
   "count": 10,
-  "limit": 10,
   "articles": [
     {
-      "title": "Article title",
-      "url": "https://www.thedailystar.net/...",
-      "heading": "Article heading",
-      "date_time": "Published date",
-      "image": "Image URL",
-      "news_body_text_full": "Full article text..."
+      "title": "Article headline",
+      "url": "https://...",
+      "image": "https://...",
+      "date_time": "2024-12-03T...",
+      "news_body_text_full": "Complete article text..."
     }
   ]
 }
 ```
 
----
-
-### Prothom Alo
+### AI Daily Summary ✨
 
 ```http
-GET /prothomalo/latest?limit=10
+GET /summary/{source}?cache=on
 ```
 
-**Parameters:**
+**Sources**: `daily-star`, `prothom-alo`, `ittefaq`
 
-- `limit` (optional): Number of articles (1-100, default: 10)
+**Parameters**:
+- `cache` (optional): `on` (default) or `off` to bypass cache
 
-**Response:**
-
+**Response Format**:
 ```json
-[
-  {
-    "news_header": "Article headline",
-    "image_url": "https://images.assettype.com/...",
-    "publish_time": "2024-12-02T10:30:00Z",
-    "section": "National",
-    "summary": "Article summary",
-    "article_url": "https://www.prothomalo.com/...",
-    "news_body_text_full": "Full article text..."
+{
+  "story_of_day": {
+    "title": "Most significant story",
+    "summary": "Why this story matters..."
+  },
+  "categories": [
+    {
+      "category": "Politics",
+      "items": ["Key takeaway 1", "Key takeaway 2"]
+    }
+  ],
+  "metadata": {
+    "source": "The Daily Star",
+    "articles_analyzed": 15
   }
-]
+}
 ```
 
----
-
-### Ittefaq
-
-```http
-GET /ittefaq/latest?limit=10
-```
-
-**Parameters:**
-
-- `limit` (optional): Number of articles to return (1-100)
-
-**Response:**
-
-```json
-[
-  {
-    "title": "Article title",
-    "link": "https://www.ittefaq.com.bd/...",
-    "image": "https://cdn.ittefaqbd.com/...",
-    "summary": "Article summary",
-    "category": "Politics",
-    "time": "Publication time",
-    "news_body_text_full": "Full article text..."
-  }
-]
-```
-
-## 🏗️ Project Structure
-
-```
-Hynews/
-├── app/
-│   ├── main.py                 # FastAPI application entry point
-│   ├── api/                    # API route handlers
-│   │   ├── daily_star.py       # Daily Star endpoints
-│   │   ├── prothom_alo.py      # Prothom Alo endpoints
-│   │   └── ittefaq.py          # Ittefaq endpoints
-│   ├── models/                 # Pydantic models
-│   │   ├── daily_star.py       # Daily Star data models
-│   │   ├── prothom_alo.py      # Prothom Alo data models
-│   │   └── ittefaq.py          # Ittefaq data models
-│   └── services/               # Business logic & scrapers
-│       ├── scraper.py          # Daily Star scraper
-│       ├── prothom_alo.py      # Prothom Alo API client
-│       ├── ittefaq.py          # Ittefaq API client
-│       └── image_extractor.py  # Image extraction utility
-├── requirements.txt
-└── README.md
-```
+**Features**:
+- Analyzes top 15-20 articles
+- Groups stories by category (Politics, Sports, Economy, etc.)
+- Identifies "Story of the Day"
+- Cached for 24 hours for faster response
 
 ## 🛠️ Tech Stack
 
-- **FastAPI**: Modern, high-performance web framework
-- **Uvicorn**: Lightning-fast ASGI server
-- **httpx**: Async HTTP client for API requests
-- **requests**: HTTP library for synchronous requests
-- **BeautifulSoup4**: HTML parsing and web scraping
-- **lxml**: High-performance XML/HTML parser
-- **Pydantic**: Data validation and settings management
-
-## 📰 Supported News Sources
-
-| Source           | Method         | Status     |
-| ---------------- | -------------- | ---------- |
-| **Daily Star**   | Web Scraping   | ✅ Active  |
-| **Prothom Alo**  | API + Scraping | ✅ Active  |
-| **Ittefaq**      | API + Scraping | ✅ Active  |
-| **More sources** | Coming Soon    | 🚧 Planned |
-
-## 🔧 Development
-
-### Adding a New News Source
-
-1. **Create Service**: Add a client/scraper in `app/services/`
-2. **Define Model**: Create Pydantic model in `app/models/`
-3. **Create Router**: Add API routes in `app/api/`
-4. **Register**: Include router in `app/main.py`
-
-### Error Handling
-
-- **500**: Internal server errors (scraping/parsing failures)
-- **502**: Upstream API failures (external services unreachable)
-- **4xx**: Client errors (invalid parameters)
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-
-- Add new news sources
-- Improve existing scrapers
-- Enhance error handling
-- Update documentation
+- **FastAPI** - Modern Python web framework
+- **Google Gemini AI** - AI-powered summarization
+- **Supabase** - Cloud database for caching
+- **BeautifulSoup4 + lxml** - Web scraping
+- **httpx** - Async HTTP client
 
 ## 📄 License
 
-MIT License - feel free to use this project for personal or commercial purposes.
-
-## 🙏 Acknowledgments
-
-Built with ❤️ for the Bangladeshi news ecosystem.
+MIT License - Free to use for personal or commercial purposes.
 
 ---
 
-**Note**: This project is for educational and research purposes. Please respect the terms of service of the news sources being accessed.
+<div align="center">
+
+**Built with ❤️ for the Bangladeshi news ecosystem**
+
+*For educational and research purposes. Please respect the terms of service of news sources.*
+
+</div>

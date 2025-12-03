@@ -1,5 +1,9 @@
 from fastapi import FastAPI
-from app.api import daily_star, prothom_alo, ittefaq
+from dotenv import load_dotenv
+from app.api import daily_star, prothom_alo, ittefaq, summary
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI(
     title="Hynews API",
@@ -11,6 +15,7 @@ app = FastAPI(
 app.include_router(daily_star.router)
 app.include_router(prothom_alo.router)
 app.include_router(ittefaq.router)
+app.include_router(summary.router)
 
 
 @app.get("/")
@@ -22,6 +27,7 @@ def root():
             "daily_star": "/dailystar/latest",
             "prothom_alo": "/prothomalo/latest",
             "ittefaq": "/ittefaq/latest",
+            "ai_summary": "/summary/{source}",
         },
         "docs": "/docs",
     }

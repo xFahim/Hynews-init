@@ -4,3 +4,6 @@ requests
 httpx
 beautifulsoup4
 lxml
+python-dotenv
+google-genai
+supabase

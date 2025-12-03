@@ -15,3 +15,5 @@ class DailyStarArticle(BaseModel):
     news_body_text_full: str
 
 
+
+
