@@ -51,6 +51,18 @@ A FastAPI-based service that aggregates news from major Bangladeshi news sources
 - 📝 **Full Article Content** - Complete article text extraction
 - 🎯 **Clean REST API** - Well-documented with OpenAPI/Swagger
 
+## 🔗 Try It Now
+
+**Latest News**:
+- [Daily Star Latest](https://hynews-init.vercel.app/dailystar/latest)
+- [Prothom Alo Latest](https://hynews-init.vercel.app/prothomalo/latest)
+- [Ittefaq Latest](https://hynews-init.vercel.app/ittefaq/latest)
+
+**AI Summaries**:
+- [Daily Star Summary](https://hynews-init.vercel.app/summary/daily-star)
+- [Prothom Alo Summary](https://hynews-init.vercel.app/summary/prothom-alo)
+- [Ittefaq Summary](https://hynews-init.vercel.app/summary/ittefaq)
+
 ## 🚀 Quick Start
 
 ```bash
